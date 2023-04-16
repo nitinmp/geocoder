@@ -4,9 +4,6 @@ from flask import Flask, jsonify
 import pandas as pd
 import s3fs
 
-app = Flask(__name__)
-
-@app.route('/geocode')
 def geocode():
     aws_access_key_id = "AKIA4CMSZ232GY35CEMV"
     aws_secret_access_key = "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"
@@ -31,6 +28,7 @@ def geocode():
             print(location.address)
     df.to_csv("s3://zono-geocoder/output/output.csv",index = False)
     return jsonify({'message': "Geocoding completed successfully"})
+
 if __name__ == '__main__':
     app.run()
 
