@@ -1,6 +1,6 @@
 Flask==2.2.3
 pandas
 geopy
-s3fs
 jsonify
 awscli
+awswrangler
