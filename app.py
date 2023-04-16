@@ -36,7 +36,5 @@ def geocode():
     wr.s3.to_csv(df, "s3://zono-geocoder/output/output.csv")
 
     return jsonify({'message': "Geocoding completed successfully"})
-
-
 if __name__ == '__main__':
     app.run(debug=True)
