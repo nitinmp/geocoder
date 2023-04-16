@@ -1,14 +1,20 @@
-import boto3
+import os
+import s3fs
+from flask import Flask, Response
 
 app = Flask(__name__)
 
-@app.route('/geocode')
-def download_csv_file(bucket_name,key,file_path):
-    s3 = boto3.client('s3')
-    s3.download_file(bucket_name,key,file_path)
-bucket_name = "zono-geocoder"
-key = "s3://zono-geocoder/input/geocoding.csv"
-file_path = "/home/ved/Downloads"
+@app.route('/download')
+def download_file():
+    bucket_name = 'zono-geocoder'
+    key = 'output/output.csv'
+    s3 = s3fs.S3FileSystem(anon=False)
 
-download_csv_file(bucket_name,key,file_path)
+    if s3.exists(f"{bucket_name}/{key}"):
+        file_stream = s3.open(f"{bucket_name}/{key}", 'rb')
+        return Response(file_stream, mimetype='text/csv', headers={"Content-Disposition": "attachment;filename=output.csv"})
+    else:
+        return "File not found on S3"
 
+if __name__ == '__main__':
+    app.run()
