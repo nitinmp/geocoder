@@ -3,7 +3,9 @@ from geopy.geocoders import GoogleV3
 from flask import Flask, jsonify
 import pandas as pd
 import s3fs
+app = Flask(__name__)
 
+@app.route('/geocode')
 def geocode():
     aws_access_key_id = "AKIA4CMSZ232GY35CEMV"
     aws_secret_access_key = "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"
