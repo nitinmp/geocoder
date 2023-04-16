@@ -2,7 +2,8 @@ import csv
 from geopy.geocoders import GoogleV3
 from flask import Flask, jsonify
 import pandas as pd
-import s3fs
+# import s3fs
+import awswrangler as wr
 
 app = Flask(__name__)
 
@@ -15,7 +16,8 @@ def geocode():
 
     geolocator = GoogleV3(api_key=api_key)
 
-    df = pd.read_csv("s3://zono-geocoder/input/geocoding.csv")
+    # df = pd.read_csv("s3://zono-geocoder/input/geocoding.csv")
+    df = wr.s3.read_csv("s3://zono-geocoder/input/geocoding.csv")
     print(df)
 
     for i, row in df.iterrows():
@@ -30,9 +32,11 @@ def geocode():
             df.at[i, "Lat"] = location.latitude
             df.at[i, "Lon"] = location.longitude
             print(location.address)
-    df.to_csv("s3://zono-geocoder/output/output.csv", index=False)
+    # df.to_csv("s3://zono-geocoder/output/output.csv", index=False)
+    wr.s3.to_csv(df, "s3://zono-geocoder/output/output.csv")
+
     return jsonify({'message': "Geocoding completed successfully"})
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(debug=True)

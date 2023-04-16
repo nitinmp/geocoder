@@ -18,7 +18,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 
 # Exposing the flask app port from container to host
-EXPOSE 5000
+EXPOSE 5001
 
 # Starting application
-CMD ["python", "app.py"]
+# CMD ["python", "app.py"]
+CMD [ "python", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5001"]
