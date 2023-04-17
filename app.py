@@ -2,23 +2,22 @@ import csv
 from geopy.geocoders import GoogleV3
 from flask import Flask, jsonify
 import pandas as pd
-# import s3fs
 import awswrangler as wr
 
 
 app = Flask(__name__)
 
 
-@app.route('/geo')
+@app.route('/geocode')
 def geocode():
-    # aws_access_key_id = "YOUR_ACCESS_KEY_ID"
-    # aws_secret_access_key = "YOUR_SECRET_ACCESS_KEY"
+    aws_access_key_id = "AKIA4CMSZ232GY35CEMV"
+    aws_secret_access_key = "1ZQk2lOfSGYcF3P9clsN12FOk6BADbIOa3akVApV"
     api_key = "AIzaSyDQYZ4uHQ86UoLdUoNN2nMVuZ9EgGngDqg"
 
     geolocator = GoogleV3(api_key=api_key)
 
-    df = pd.read_csv("geocoding.csv")
-    # df = wr.s3.read_csv("s3://zono-geocoder/input/geocoding.csv")
+    # df = pd.read_csv("geocoding.csv")
+    df = wr.s3.read_csv("s3://zono-geocoder/input/geocoding.csv")
     print(df)
 
     for i, row in df.iterrows():
@@ -46,8 +45,8 @@ def geocode():
                     df.at[i, "Pincode"] = component['long_name']
             
             print(location.address)
-    df.to_csv("test.csv", index=False)
-    # wr.s3.to_csv(df, "s3://zono-geocoder/output/output.csv")
+    # df.to_csv("test.csv", index=False)
+    wr.s3.to_csv(df, "s3://zono-geocoder/output/output.csv")
     return jsonify({'message': "Geocoding completed successfully"})
 
 if __name__ == '__main__':
