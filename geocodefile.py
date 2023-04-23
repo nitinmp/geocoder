@@ -1,17 +1,17 @@
 from geopy.geocoders import GoogleV3
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import pandas as pd
 import awswrangler as wr
 
-def geocode(x):
+def process():
     aws_access_key_id = "AKIA4CMSZ232GY35CEMV"
     aws_secret_access_key = "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"
     api_key = "AIzaSyDQYZ4uHQ86UoLdUoNN2nMVuZ9EgGngDqg"
-
+    filename = request.args.get("filename")
     geolocator = GoogleV3(api_key=api_key)
 
     # df = pd.read_csv("geocoding.csv")
-    df = wr.s3.read_csv("s3://zono-geocoder/input/" + x)
+    df = wr.s3.read_csv("s3://zono-geocoder/input/" + filename)
     print(df)
 
     for i, row in df.iterrows():
