@@ -1,8 +1,8 @@
 import boto3
 from flask import render_template
-def home():
+def get_download_files():
     s3_bucket = 'zono-geocoder'
-    s3_prefix = 'input/'
+    s3_prefix = 'output/'
 
     s3 = boto3.resource('s3')
     bucket = s3.Bucket(s3_bucket)
@@ -19,5 +19,4 @@ def home():
             'size': obj.size
         }
         file_details.append(file_detail)
-
-    return render_template('index.html', files=file_details)
+    return render_template('Download_files.html', files=file_details)

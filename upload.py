@@ -11,6 +11,5 @@ def success():
         f = request.files['file']
         print("File to be uploaded:", f.filename)
         wr.s3.upload(f, "s3://zono-geocoder/input/" + f.filename)
-        return jsonify({'message': "Input file uploaded"})
-
-
+        return redirect("/")
+        # return jsonify({'message': "Input file uploaded"})

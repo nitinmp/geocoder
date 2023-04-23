@@ -1,15 +1,3 @@
-<!-- <html>
-<head>
-	<title>upload the file : GFG</title>
-</head>
-<body>
-	<form action = "/upload" method = "post" enctype="multipart/form-data">
-		<input type="file" name="file" />
-		<input type = "submit" value="Upload">
-	</form>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -35,8 +23,9 @@
                 class="custom-file-input"
                 id="inputFile"
                 name="file"
+                onchange="document.getElementById('inputFileLabel').innerHTML = this.files[0].name;"
               />
-              <label class="custom-file-label" for="inputFile"
+              <label class="custom-file-label" for="inputFile" id="inputFileLabel"
                 >Choose file</label
               >
             </div>
@@ -47,7 +36,7 @@
             </button>
           </div>
           <div class="col-md-2">
-            <a href="{{ url_for('home') }}" class="btn btn-primary btn-block"
+            <a href="{{ url_for('get_download_files') }}" class="btn btn-primary btn-block"
               >Download</a
             >
           </div>

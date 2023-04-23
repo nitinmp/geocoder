@@ -1,5 +1,5 @@
 from geopy.geocoders import GoogleV3
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, redirect
 import pandas as pd
 import awswrangler as wr
 
@@ -12,7 +12,7 @@ def process():
 
     # df = pd.read_csv("geocoding.csv")
     df = wr.s3.read_csv("s3://zono-geocoder/input/" + filename)
-    print(df)
+    # print(df)
 
     for i, row in df.iterrows():
         lat = row["Lat"]
@@ -38,7 +38,10 @@ def process():
                 elif 'postal_code' in component['types']:
                     df.at[i, "Pincode"] = component['long_name']
             
-            print(location.address)
+            # print(location.address)
     # df.to_csv("test.csv", index=False)
-    wr.s3.to_csv(df, "s3://zono-geocoder/output/output.csv")
-    return jsonify({'message': "Geocoding completed successfully"})
+    # wr.s3.to_csv(df, "s3://zono-geocoder/output/output.csv")
+    output_file = "output/" + filename.split("/")[-1]
+    wr.s3.to_csv(df, f"s3://zono-geocoder/{output_file}")
+    # return jsonify({'message': "Geocoding completed successfully"})
+    return redirect('/get_download')
