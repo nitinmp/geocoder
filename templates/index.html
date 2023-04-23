@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
 <head>
 	<title>upload the file : GFG</title>
 </head>
@@ -8,4 +8,64 @@
 		<input type = "submit" value="Upload">
 	</form>
 </body>
+</html> -->
+
+
+
+<!doctype html>
+<html>
+  <head>
+    <title>Geocoder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center">Geocoder</h1>
+      <br>
+      <form method="POST" enctype="multipart/form-data">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="inputFile" name="file">
+              <label class="custom-file-label" for="inputFile">Choose file</label>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary btn-block">Upload</button>
+          </div>
+          <div class="col-md-2">
+            <a href="{{ url_for('home') }}" class="btn btn-primary btn-block">Download</a>
+          </div>
+        </div>
+      </form>
+      <br>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Created</th>
+              <th>Updated</th>
+              <th>Size</th>
+              <th>Process</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for file in files %}
+            <tr>
+              <td>{{ file['name'] }}</td>
+              <td>{{ file['created'] }}</td>
+              <td>{{ file['updated'] }}</td>
+              <td>{{ file['size'] }}</td>
+              <td><a href="{{ url_for('home', filename=file['name']) }}" class="btn btn-primary">Process</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
 </html>
