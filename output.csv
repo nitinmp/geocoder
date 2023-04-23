@@ -1,3 +1,5 @@
-srno,Lat,Lon,Address
-1,17.3870264,78.491599,"9FPR+RJX, Sai Nanditha Enclave, Kutbi Guda, Kachiguda, Hyderabad, Telangana 500027, India"
-2,17.4917366,78.3922881,"A1, Staff Quaters Rd, Ashok Nagar, Kukatpally Housing Board Colony, Kukatpally, Hyderabad, Telangana 500085, India"
+Address,City,Pincode,District,Town,Sub District,State,Country,Latitude,Longitude
+"9FPR+RJX, Sai Nanditha Enclave, Kutbi Guda, Kachiguda, Hyderabad, Telangana 500027, India",Hyderabad,500027,,Hyderabad,Kachiguda,Telangana,India,17.3870264,78.491599
+"A1, Staff Quaters Rd, Ashok Nagar, Kukatpally Housing Board Colony, Kukatpally, Hyderabad, Telangana 500085, India",Hyderabad,500085,,Medchal-Malkajgiri,Kukatpally,Telangana,India,17.4917366,78.3922881
+"Villa-66, KEERTHI RICHMOND VILLAS, Padmasri Estates, Sun City, Bandlaguda Jagir, Telangana 500091, India",Bandlaguda Jagir,500091,,Rangareddy,Sun City,Telangana,India,17.3617889,78.40739529999999
+"D-1/10A Budh Vihar Phase-1 delhi - 110086, Lodhi Colony, Sector 3, Rohini, New Delhi, Delhi 110008, India",New Delhi,110008,Delhi Division,North West Delhi,Rohini,Delhi,India,28.7040701,77.10248299999999
